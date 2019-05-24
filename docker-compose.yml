@@ -1,0 +1,14 @@
+version: '3'
+services:
+  streamripper:
+    image: clue/streamripper
+    restart: always
+    volumes:
+      - $HOME/stream-recording:/home/streamripper
+    command: http://stream.radioangrezi.de:8000/live -s -l 3600 -o never -T -a "ra-stream-rec-%D"
+  web:
+    image: clue/h5ai
+    ports:
+      - 80:80
+    volumes:
+      - $HOME/stream-recording:/var/www
